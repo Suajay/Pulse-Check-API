@@ -93,14 +93,14 @@ sequenceDiagram
 stateDiagram-v2
     [*] --> active : POST /monitors (register)
 
-    active --> active : POST /monitors/{id}/heartbeat\n(countdown reset)
+    active --> active : POST /monitors/{id}/heartbeat (countdown reset)
     active --> paused : POST /monitors/{id}/pause
     active --> down   : Scheduler timeout fires
 
-    paused --> active : POST /monitors/{id}/heartbeat\n(resume + reset)
+    paused --> active : POST /monitors/{id}/heartbeat (resume + reset)
     paused --> down   : not possible (scheduler skips paused)
 
-    down --> [*] : terminal state\n(re-register to reset)
+    down --> [*] : terminal state (re-register to reset)
 ```
 
 | Transition | Trigger | Result |
