@@ -62,27 +62,29 @@ sequenceDiagram
 
 ### Layer Diagram
 
-```
-┌─────────────────────────────────────────────────────┐
-│                   HTTP Client / Device               │
-└─────────────────────┬───────────────────────────────┘
-                      │ REST
-┌─────────────────────▼───────────────────────────────┐
-│              Controller Layer                        │
-│  MonitorController  (request validation, routing)    │
-└─────────────────────┬───────────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────────┐
-│               Service Layer                          │
-│  MonitorService     (business logic, state machine)  │
-│  AlertService       (alert emission)                 │
-│  WatchdogScheduler  (@Scheduled, timeout detection)  │
-└─────────────────────┬───────────────────────────────┘
-                      │
-┌─────────────────────▼───────────────────────────────┐
-│              Repository Layer                        │
-│  MonitorRepository  (in-memory ConcurrentHashMap)    │
-└─────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    A["HTTP Client / Device"]
+
+    subgraph Controller["Controller Layer"]
+        B["MonitorController\nRequest validation & routing"]
+    end
+
+    subgraph Service["Service Layer"]
+        C["MonitorService\nBusiness logic & state machine"]
+        D["AlertService\nAlert emission"]
+        E["WatchdogScheduler\n@Scheduled — timeout detection"]
+    end
+
+    subgraph Repository["Repository Layer"]
+        F["MonitorRepository\nIn-memory ConcurrentHashMap"]
+    end
+
+    A -->|REST| B
+    B --> C
+    C --> D
+    C --> F
+    E --> C
 ```
 
 ---
