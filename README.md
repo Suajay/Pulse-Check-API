@@ -4,7 +4,7 @@ A **Dead Man's Switch API** built for **CritMon Servers Inc.** to monitor remote
 
 Devices register a monitor with a configurable timeout. If a heartbeat is not received before the countdown expires, the system automatically fires an alert and marks the device as **down** — no human log-checking required.
 
-**Stack:** Java 17 · Spring Boot 3 · Docker · Layered Architecture (Controller → Service → Repository)
+**Stack:** Java 17 · Spring Boot 4 · Docker · Layered Architecture (Controller → Service → Repository)
 
 ---
 
@@ -126,14 +126,14 @@ stateDiagram-v2
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/pulse-check-api.git
-cd pulse-check-api
+git clone https://github.com/Suajay/Pulse-Check-API.git
+cd Pulse-Check-API
 
-# 2. Build the project
-./mvnw clean package -DskipTests
-
-# 3. Run the application
+# 2. Build and run (Linux/Mac)
 ./mvnw spring-boot:run
+
+# 2. Build and run (Windows)
+mvnw.cmd spring-boot:run
 ```
 
 The API will be available at `http://localhost:8080`.
